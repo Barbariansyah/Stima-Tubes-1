@@ -10,7 +10,7 @@ Cara kerjanya :
 4. Apabila bertemu operator perkalian / pembagian dan sebelumnya adalah operator penjumlahan otomatis diberi kurung
 5. Lakukan langkah hingga semua angka terpakai
 -----------------------------------------------
-Versi 1 :
+Versi 2 :
 Cara kerjanya :
 1. Urut angka secara menurun 
 2. Langkah dimulai dari yang paling besar
