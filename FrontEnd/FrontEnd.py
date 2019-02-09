@@ -46,7 +46,6 @@ def Print_Result():
             card.x = img
             card.place(x=pos, y=200)
             pos += 250
-            print(List_Num)
 
     sol = tk.Label(root,
                 text=solution,
