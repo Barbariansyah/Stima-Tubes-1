@@ -36,10 +36,10 @@ def main():
 							maks_localpoint = localpoint
 							maks_equationlocal = localequation
 							lastsymbol_local = "/"
+						
 						maks_equationglobal = maks_equationlocal
 						maks_global = maks_localpoint
-						point = maks_global + abs(24 - eval(maks_equationglobal)) 
-						lastsymbol = lastsymbol_local
+						#lastsymbol = lastsymbol_local
 						#print(point)
 					
 					sums = sums + maks_global
