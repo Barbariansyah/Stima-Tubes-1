@@ -134,43 +134,99 @@ def Solver():
     point = 0
     lastsymbol = ""
 
-    List_Num.sort(reverse=True)  # Sort Descending
+    # List_Num.sort(reverse=True)  # Sort Descending
+    # solution = str(List_Num[0])
+
+    # for i in range(1, 4):
+    #     # Perkalian
+    #     maks_equationlocal = solution + "*" + str(List_Num[i])
+    #     maks_localpoint = point + 3 - abs(24-eval(maks_equationlocal))
+    #     lastsymbol_local = "*"
+
+    #     # Pertambahan
+    #     localequation = solution + "+" + str(List_Num[i])
+    #     localpoint = point + 5 - abs(24-eval(localequation))
+    #     if(localpoint > maks_localpoint):
+    #         maks_localpoint = localpoint
+    #         maks_equationlocal = localequation
+    #         lastsymbol_local = "+"
+
+    #     # Pengurangan
+    #     localequation = solution + "-" + str(List_Num[i])
+    #     localpoint = point + 4 - abs(24-eval(localequation))
+    #     if(localpoint > maks_localpoint):
+    #         maks_localpoint = localpoint
+    #         maks_equationlocal = localequation
+    #         lastsymbol_local = "-"
+
+    #     # Pembagian
+    #     localequation = solution + "/" + str(List_Num[i])
+    #     localpoint = point + 2 - abs(24-eval(localequation))
+    #     if(localpoint > maks_localpoint):
+    #         maks_localpoint = localpoint
+    #         maks_equationlocal = localequation
+    #         lastsymbol_local = "/"
+
+    #     solution = maks_equationlocal
+    #     point = maks_localpoint
+
+    # Score += point
+    List_Num.sort(reverse = True) #Sort Descending
     solution = str(List_Num[0])
-
-    for i in range(1, 4):
-        # Perkalian
-        maks_equationlocal = solution + "*" + str(List_Num[i])
-        maks_localpoint = point + 3 - abs(24-eval(maks_equationlocal))
-        lastsymbol_local = "*"
-
-        # Pertambahan
-        localequation = solution + "+" + str(List_Num[i])
-        localpoint = point + 5 - abs(24-eval(localequation))
-        if(localpoint > maks_localpoint):
-            maks_localpoint = localpoint
-            maks_equationlocal = localequation
-            lastsymbol_local = "+"
-
-        # Pengurangan
-        localequation = solution + "-" + str(List_Num[i])
-        localpoint = point + 4 - abs(24-eval(localequation))
-        if(localpoint > maks_localpoint):
+    point = 0
+    lastsymbol = ""
+    for i in range(1,4):
+        #Pertambahan
+        maks_equationlocal = solution + "+" + str(List_Num[i]) 
+        maks_localpoint = eval(maks_equationlocal)
+        lastsymbol_local = "+"
+        #Pengurangan
+        localequation = solution + "-" + str(List_Num[i]) 
+        localpoint = eval(localequation) 
+        if(abs(localpoint-24) < abs(maks_localpoint-24)):
             maks_localpoint = localpoint
             maks_equationlocal = localequation
             lastsymbol_local = "-"
-
-        # Pembagian
-        localequation = solution + "/" + str(List_Num[i])
-        localpoint = point + 2 - abs(24-eval(localequation))
-        if(localpoint > maks_localpoint):
+        #Perkalian
+        localequation = solution + "*" + str(List_Num[i]) 
+        localpoint = eval(localequation) 
+        if(abs(localpoint-24) < abs(maks_localpoint-24)):
+            maks_localpoint = localpoint
+            maks_equationlocal = localequation
+            lastsymbol_local = "*"
+        if(lastsymbol == "+" or lastsymbol == "-"):
+            localequation = "(" + solution + ")*" + str(List_Num[i]) 
+            localpoint = eval(localequation) 
+            if(abs(localpoint-24) < abs(maks_localpoint-24)):
+                maks_localpoint = localpoint
+                maks_equationlocal = localequation
+                lastsymbol_local = "*"
+        #Pembagian
+        localequation = solution + "/" + str(List_Num[i]) 
+        localpoint = eval(localequation)
+        if(abs(localpoint-24) < abs(maks_localpoint-24)):
             maks_localpoint = localpoint
             maks_equationlocal = localequation
             lastsymbol_local = "/"
-
+        if(lastsymbol == "+" or lastsymbol == "-"):
+            localequation = "(" + solution + ")/" + str(List_Num[i]) 
+            localpoint = eval(localequation) 
+            if(abs(localpoint-24) < abs(maks_localpoint-24)):
+                maks_localpoint = localpoint
+                maks_equationlocal = localequation
+                lastsymbol_local = "/"
         solution = maks_equationlocal
-        point = maks_localpoint
-
-    Score += point
+        maks_global = maks_localpoint
+        if(lastsymbol_local == "+"):
+            point += 5;
+        elif(lastsymbol_local == "-"):
+            point += 4
+        elif(lastsymbol_local == "*"):
+            point += 2
+        elif(lastsymbol_local == "/"):
+            point += 1 
+    point -= abs(maks_global - 24) - solution.count("(")
+    Score = point
 
 if __name__ == '__main__':
     root = game.Tk()
