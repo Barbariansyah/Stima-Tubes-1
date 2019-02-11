@@ -57,7 +57,7 @@ def Print_Result():
     sol.place(x=100, y=550)
 
     val = game.Label(root,
-                text=Eval,
+                text="%.2f"Eval,
                 font=('Helvetica', 30, 'bold', 'italic'),
                 bg='Green',
                 fg='Green')
@@ -84,7 +84,7 @@ def Print_Solution():
         sol.place(x=100, y=550)
 
         val = game.Label(root,
-                text=Eval,
+                text="%.2f"Eval,
                 font=('Helvetica', 30, 'bold', 'italic'),
                 bg='Green',
                 fg='white')
