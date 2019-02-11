@@ -8,6 +8,7 @@ emblem = ['C', 'D', 'H', 'S']
 List_Num = []
 List_Card = []
 Score = 0
+Eval = 0
 solution = ''
 
 
@@ -31,6 +32,7 @@ def Print_Result():
     global Score
     global solution
     global List_Num
+    global Eval
 
     if len(List_Card) != 0:
         for i in range(4):
@@ -52,10 +54,17 @@ def Print_Result():
                 font=('Helvetica', 30, 'bold', 'italic'),
                 bg='Green',
                 fg='Green')
-    sol.place(x=100, y=600)
+    sol.place(x=100, y=550)
+
+    val = game.Label(root,
+                text=Eval,
+                font=('Helvetica', 30, 'bold', 'italic'),
+                bg='Green',
+                fg='Green')
+    val.place(x=100, y=700)
 
     score = game.Label(root,
-                text=Score,
+                text="%.2f"%Score,
                 font=('Helvetica', 30, 'bold', 'italic'),
                 bg='Green',
                 fg='Green')
@@ -72,10 +81,17 @@ def Print_Solution():
                 font=('Helvetica', 30, 'bold', 'italic'),
                 bg='Green',
                 fg='white')
-        sol.place(x=100, y=600)
+        sol.place(x=100, y=550)
+
+        val = game.Label(root,
+                text=Eval,
+                font=('Helvetica', 30, 'bold', 'italic'),
+                bg='Green',
+                fg='white')
+        val.place(x=100, y=700)
 
         score = game.Label(root,
-                text=Score,
+                text="%.2f"%Score,
                 font=('Helvetica', 30, 'bold', 'italic'),
                 bg='Green',
                 fg='White')
@@ -119,6 +135,12 @@ def Layout(Card):
              fg='White').place(x=100, y=500)
 
     game.Label(root,
+             text="EVALUATION : ",
+             font=('Helvetica', 30, 'bold', 'italic'),
+             bg='Green',
+             fg='White').place(x=100, y=650)
+
+    game.Label(root,
              text="SCORE : ",
              font=('Helvetica', 30, 'bold', 'italic'),
              bg='Green',
@@ -131,44 +153,10 @@ def Layout(Card):
 def Solver():
     global solution
     global Score
+    global Eval
+
     point = 0
     lastsymbol = ""
-
-    # List_Num.sort(reverse=True)  # Sort Descending
-    # solution = str(List_Num[0])
-
-    # for i in range(1, 4):
-    #     # Perkalian
-    #     maks_equationlocal = solution + "*" + str(List_Num[i])
-    #     maks_localpoint = point + 3 - abs(24-eval(maks_equationlocal))
-    #     lastsymbol_local = "*"
-
-    #     # Pertambahan
-    #     localequation = solution + "+" + str(List_Num[i])
-    #     localpoint = point + 5 - abs(24-eval(localequation))
-    #     if(localpoint > maks_localpoint):
-    #         maks_localpoint = localpoint
-    #         maks_equationlocal = localequation
-    #         lastsymbol_local = "+"
-
-    #     # Pengurangan
-    #     localequation = solution + "-" + str(List_Num[i])
-    #     localpoint = point + 4 - abs(24-eval(localequation))
-    #     if(localpoint > maks_localpoint):
-    #         maks_localpoint = localpoint
-    #         maks_equationlocal = localequation
-    #         lastsymbol_local = "-"
-
-    #     # Pembagian
-    #     localequation = solution + "/" + str(List_Num[i])
-    #     localpoint = point + 2 - abs(24-eval(localequation))
-    #     if(localpoint > maks_localpoint):
-    #         maks_localpoint = localpoint
-    #         maks_equationlocal = localequation
-    #         lastsymbol_local = "/"
-
-    #     solution = maks_equationlocal
-    #     point = maks_localpoint
 
     # Score += point
     List_Num.sort(reverse = True) #Sort Descending
@@ -218,15 +206,16 @@ def Solver():
         solution = maks_equationlocal
         maks_global = maks_localpoint
         if(lastsymbol_local == "+"):
-            point += 5;
+            point += 5
         elif(lastsymbol_local == "-"):
             point += 4
         elif(lastsymbol_local == "*"):
-            point += 2
+            point += 3
         elif(lastsymbol_local == "/"):
-            point += 1 
+            point += 2
     point -= abs(maks_global - 24) - solution.count("(")
     Score = point
+    Eval = eval(solution)
 
 if __name__ == '__main__':
     root = game.Tk()
