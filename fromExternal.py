@@ -9,9 +9,8 @@ outputFile = sys.argv[2]
 input = open(inputFile, "r")
 output = open(outputFile, 'w')
 
-List_Num = input.read()
-#listOfDigits = re.findall(r"[\w']+",input)
-List_Num = [x for x in List_Num if ((x!= ' ') and (x !='\n'))]
+List_Input = input.read()
+List_Num = re.findall(r"[\w']+",List_Input)
 List_Num = list(map(int,List_Num))
 
 #CODE GOES HERE
